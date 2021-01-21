@@ -1,14 +1,16 @@
-﻿using CMS;
+﻿using System.Reflection;
+using CMS;
 using CMS.Core;
-using CMS.DataEngine;
 using Microsoft.Extensions.Configuration;
 using XperienceCommunity.AppSettingsJsonRegistration;
+
+using CMSModule = CMS.DataEngine.Module;
 
 [assembly: RegisterModule(typeof(AppSettingsJsonRegistrationModule))]
 
 namespace XperienceCommunity.AppSettingsJsonRegistration
 {
-    public class AppSettingsJsonRegistrationModule : Module
+    public class AppSettingsJsonRegistrationModule : CMSModule
     {
         public AppSettingsJsonRegistrationModule() : base(nameof(AppSettingsJsonRegistrationModule))
         {
@@ -21,6 +23,8 @@ namespace XperienceCommunity.AppSettingsJsonRegistration
 
             Service.Use<IConfiguration>(() => new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile("appsettings.local.json", true, true)
+                .AddUserSecrets(Assembly.GetEntryAssembly(), true, true)
                 .Build());
         }
     }

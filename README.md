@@ -59,6 +59,20 @@ This package is compatible with ASP.NET Core 3.1 -> ASP.NET Core 5 and is design
    }
    ```
 
+This package also supports having a `appsettings.local.json` which is optional and can be ignored in your source control.
+
+It can also support [User Secrets](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows). First add the package to your application:
+
+```xml
+<ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.11" />
+</ItemGroup>
+```
+
+Then right click on your project in Visual Studio and select "Manage User Secrets" to create the secrets file.
+
+Secrets can also be managed for a project, outside of Visual Studio, [at the commend line](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows#enable-secret-storage) using the .NET CLI.
+
 ## References
 
 ### Kentico Xperience
