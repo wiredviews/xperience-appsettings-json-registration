@@ -1,6 +1,6 @@
 # Xperience appsettings.json Registration
 
-[![NuGet Package](https://img.shields.io/nuget/v/WiredViews.Xperience.AppSettingsJsonRegistration.svg)](https://www.nuget.org/packages/WiredViews.Xperience.AppSettingsJsonRegistration)
+[![NuGet Package](https://img.shields.io/nuget/v/XperienceCommunity.AppSettingsJsonRegistration.svg)](https://www.nuget.org/packages/XperienceCommunity.AppSettingsJsonRegistration)
 
 This package provides a [Kentico Xperience 13.0](https://docs.xperience.io/developing-websites/developing-xperience-applications-using-asp-net-core/) custom module to auto-register the ASPNET Core appsettings.json as Xperience's configuration source.
 
@@ -15,7 +15,7 @@ This package is compatible with ASP.NET Core 3.1 -> ASP.NET Core 5 and is design
 1. First, install the NuGet package in your ASP.NET Core project
 
    ```bash
-   dotnet add package WiredViews.Xperience.AppSettingsJsonRegistration
+   dotnet add package XperienceCommunity.AppSettingsJsonRegistration
    ```
 
 1. Create an `appsettings.json` file at the root of your console app project with the `CMSConnectionString`
