@@ -8,13 +8,13 @@ on:
         required: true
         default: 'Manual run'
 
-env: 
-  PROJECT_PATH: './src/XperienceCommunity.AppSettingsJsonRegistration/XperienceCommunity.AppSettingsJsonRegistration.csproj'
-
 jobs:
   createArtifacts:
     name: Generate NuGet Packages
     runs-on: ubuntu-latest
+    env: 
+      PROJECT_PATH: './src/XperienceCommunity.AppSettingsJsonRegistration/XperienceCommunity.AppSettingsJsonRegistration.csproj'
+
     steps:
       - uses: actions/checkout@v3
     
@@ -62,10 +62,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: prerelease
-          path: './artifacts/prerelease/*'
           
       - name: Publish NuGet Package
-        run: dotnet nuget push ./artifacts/prerelease/* -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
 
   publishRelease:
     name: Publish Release NuGet Package
@@ -77,7 +76,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: release
-          path: './artifacts/release/*'
           
       - name: Publish NuGet Package
-        run: dotnet nuget push ./artifacts/release/* -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
