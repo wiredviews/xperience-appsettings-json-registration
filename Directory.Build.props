@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="$(SolutionDir)\images\wv-logo.png" Pack="true" Visible="false" PackagePath="" />
-    <None Include="$(SolutionDir)\README.md" Pack="true" PackagePath=""/>
+    <None Include="$(MSBuildStartupDirectory)\images\wv-logo.png" Pack="true" Visible="false" PackagePath="" />
+    <None Include="$(MSBuildStartupDirectory)\README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
   
   <PropertyGroup>
