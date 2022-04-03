@@ -2,6 +2,13 @@ name: 'CI: Build'
 
 on:
   push:
+    branches: [ main ]
+    paths:
+    - '**.cs'
+    - '**.csproj'
+    - '**.props'
+    - '**.targets'
+    - '**.sln'
   pull_request:
     branches: [ main ]
     paths:

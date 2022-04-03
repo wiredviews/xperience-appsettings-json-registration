@@ -2,6 +2,8 @@
 
 [![GitHub Actions CI: Build](https://github.com/wiredviews/xperience-appsettings-json-registration/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/wiredviews/xperience-appsettings-json-registration/actions/workflows/ci.yml)
 
+[![Publish Packages to NuGet](https://github.com/wiredviews/xperience-appsettings-json-registration/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/wiredviews/xperience-appsettings-json-registration/actions/workflows/publish.yml)
+
 [![NuGet Package](https://img.shields.io/nuget/v/XperienceCommunity.AppSettingsJsonRegistration.svg)](https://www.nuget.org/packages/XperienceCommunity.AppSettingsJsonRegistration)
 
 This package provides a [Kentico Xperience 13.0](https://docs.xperience.io/developing-websites/developing-xperience-applications-using-asp-net-core/) custom module to auto-register the ASPNET Core appsettings.json as Xperience's configuration source.
