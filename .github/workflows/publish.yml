@@ -54,7 +54,7 @@ jobs:
 
   publishPreRelease:
     name: Publish PreRelease NuGet Package
-    environment: prelease
+    environment: prerelease
     needs: createArtifacts
     runs-on: ubuntu-latest
     steps:
