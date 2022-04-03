@@ -35,22 +35,22 @@ jobs:
         run: dotnet build -c Release --no-restore
 
       - name: Create PreRelease Artifact
-        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build -o ./artifacts/prerelease --version-suffix prerelease-$GITHUB_RUN_ID-$GITHUB_RUN_NUMBER
+        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build --include-symbols -o ./artifacts/prerelease --version-suffix prerelease-$GITHUB_RUN_ID-$GITHUB_RUN_NUMBER
 
       - name: 'Save prerelease artifact'
         uses: actions/upload-artifact@v3
         with:
           name: prerelease
-          path: ./artifacts/prerelease/*.nupkg
+          path: ./artifacts/prerelease/*
 
       - name: Create Release Artifact
-        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build -o ./artifacts/release
+        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build --include-symbols -o ./artifacts/release
 
       - name: 'Save release artifact'
         uses: actions/upload-artifact@v3
         with:
           name: release
-          path: ./artifacts/release/*.nupkg
+          path: ./artifacts/release/*
 
   publishPreRelease:
     name: Publish PreRelease NuGet Package
@@ -62,10 +62,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: prerelease
-          path: './artifacts/prerelease/*.nupkg'
+          path: './artifacts/prerelease/*'
           
       - name: Publish NuGet Package
-        run: dotnet nuget push ./artifacts/prerelease/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./artifacts/prerelease/* -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
 
   publishRelease:
     name: Publish Release NuGet Package
@@ -77,7 +77,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: release
-          path: './artifacts/release/*.nupkg'
+          path: './artifacts/release/*'
           
       - name: Publish NuGet Package
-        run: dotnet nuget push ./artifacts/release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./artifacts/release/* -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
