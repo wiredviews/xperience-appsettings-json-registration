@@ -1,0 +1,81 @@
+name: publish to nuget
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'The reason for running the workflow'
+        required: true
+        default: 'Manual run'
+
+env: 
+  PROJECT_PATH: './src/XperienceCommunity.AppSettingsJsonRegistration/XperienceCommunity.AppSettingsJsonRegistration.csproj'
+
+jobs:
+  createArtifacts:
+    name: Generate NuGet Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Environment Variables
+        uses: ./.github/actions/set-env
+
+      - uses: actions/checkout@v2
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+
+      - name: Install dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build -c Release --no-restore
+
+      - name: Create PreRelease Artifact
+        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build -o ./artifacts/prerelease --version-suffix 'prerelease-$GITHUB_RUN_ID-$GITHUB_RUN_NUMBER'
+
+      - name: 'Save prerelease artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: prerelease
+          path: ./artifacts/prerelease/*.nupkg
+
+      - name: Create Release Artifact
+        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build -o ./artifacts/release
+
+      - name: 'Save release artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: prerelease
+          path: ./artifacts/release/*.nupkg
+
+  publishPreRelease:
+    name: Publish PreRelease NuGet Package
+    environment: prelease
+    needs: createArtifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: prerelease
+          path: './artifacts/prerelease/*.nupkg'
+          
+      - name: Publish NuGet Package
+        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+
+  publishRelease:
+    name: Publish Release NuGet Package
+    environment: release
+    needs: [createArtifacts, publishPreRelease]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: release
+          path: './artifacts/release/*.nupkg'
+          
+      - name: Publish NuGet Package
+        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}

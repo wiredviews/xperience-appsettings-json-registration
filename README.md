@@ -73,6 +73,12 @@ Then right click on your project in Visual Studio and select "Manage User Secret
 
 Secrets can also be managed for a project, outside of Visual Studio, [at the commend line](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows#enable-secret-storage) using the .NET CLI.
 
+## Contributions
+
+If you discover a problem, please [open an issue](https://github.com/wiredviews/xperience-appsettings-json-registration/issues/new).
+
+If you would like contribute to the code or documentation, please [open a pull request](https://github.com/wiredviews/xperience-appsettings-json-registration/compare).
+
 ## References
 
 ### Kentico Xperience
