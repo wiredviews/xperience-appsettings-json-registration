@@ -24,8 +24,4 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\images\wv-logo.png" Pack="true" Visible="false" PackagePath="" />
-  </ItemGroup>
-
 </Project>

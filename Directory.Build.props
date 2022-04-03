@@ -12,9 +12,15 @@
     <Title>$(Product)</Title>
     <PackageProjectUrl>https://github.com/wiredviews/xperience-appsettings-json-registration</PackageProjectUrl>
     <PackageIcon>wv-logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>xperience;kentico</PackageTags>
     <PackageReleaseNotes>https://github.com/wiredviews/xperience-appsettings-json-registration/releases</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(SolutionDir)\images\wv-logo.png" Pack="true" Visible="false" PackagePath="" />
+    <None Include="$(SolutionDir)\README.md" Pack="true" PackagePath=""/>
+  </ItemGroup>
   
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
