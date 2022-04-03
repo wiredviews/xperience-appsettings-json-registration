@@ -49,7 +49,7 @@ jobs:
       - name: 'Save release artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: prerelease
+          name: release
           path: ./artifacts/release/*.nupkg
 
   publishPreRelease:
@@ -65,7 +65,7 @@ jobs:
           path: './artifacts/prerelease/*.nupkg'
           
       - name: Publish NuGet Package
-        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./artifacts/prerelease/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
 
   publishRelease:
     name: Publish Release NuGet Package
@@ -80,4 +80,4 @@ jobs:
           path: './artifacts/release/*.nupkg'
           
       - name: Publish NuGet Package
-        run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./artifacts/release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
