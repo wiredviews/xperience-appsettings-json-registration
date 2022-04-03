@@ -35,7 +35,7 @@ jobs:
         run: dotnet build -c Release --no-restore
 
       - name: Create PreRelease Artifact
-        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build -o ./artifacts/prerelease --version-suffix 'prerelease-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}'
+        run: dotnet pack ${{ env.PROJECT_PATH }} -c Release --no-build -o ./artifacts/prerelease --version-suffix prerelease-$GITHUB_RUN_ID-$GITHUB_RUN_NUMBER
 
       - name: 'Save prerelease artifact'
         uses: actions/upload-artifact@v3
